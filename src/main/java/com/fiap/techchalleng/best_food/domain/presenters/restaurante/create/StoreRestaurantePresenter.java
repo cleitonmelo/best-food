@@ -1,0 +1,30 @@
+package com.fiap.techchalleng.best_food.domain.presenters.restaurante.create;
+
+import com.fiap.techchalleng.best_food.domain.generic.output.OutputInterface;
+import com.fiap.techchalleng.best_food.domain.generic.presenter.PresenterInterface;
+import com.fiap.techchalleng.best_food.domain.output.restaurante.StoreRestauranteOutput;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class StoreRestaurantePresenter implements PresenterInterface {
+
+    private final StoreRestauranteOutput output;
+
+    public StoreRestaurantePresenter(StoreRestauranteOutput restauranteOutput) {
+        this.output = restauranteOutput;
+    }
+
+    @Override
+    public Map<String, Object> toArray() {
+        Map<String, Object> result = new HashMap<>();
+        result.put("id", this.output.getRestaurante().id());
+        result.put("nome", this.output.getRestaurante().nome());
+        return result;
+    }
+
+    @Override
+    public OutputInterface getOutput() {
+        return this.output;
+    }
+}

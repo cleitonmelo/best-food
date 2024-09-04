@@ -20,4 +20,5 @@ public class RestauranteModel {
     private UUID id;
 
     private String name;
+
 }
