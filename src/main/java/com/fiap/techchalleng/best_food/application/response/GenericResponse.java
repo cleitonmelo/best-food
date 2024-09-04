@@ -30,6 +30,10 @@ public class GenericResponse {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(outputInterface.getBody());
         }
 
+        if (outputInterface.getOutputStatus().getCode() == HttpStatus.BAD_REQUEST.value()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(outputInterface.getBody());
+        }
+
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(outputInterface.getBody());
     }
 }

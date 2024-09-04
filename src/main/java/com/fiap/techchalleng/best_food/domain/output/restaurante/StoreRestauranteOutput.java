@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class CreateRestauranteOutput implements OutputInterface {
+public class StoreRestauranteOutput implements OutputInterface {
 
     private Restaurante restaurante;
     private OutputStatus outputStatus;
