@@ -10,4 +10,6 @@ public interface RestauranteInterface {
     List<Restaurante> buscaRestaurantes();
 
     Restaurante getRestauranteById(UUID id);
+
+    Restaurante createRestaurante(Restaurante restaurante);
 }
