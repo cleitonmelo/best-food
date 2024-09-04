@@ -2,16 +2,16 @@ package com.fiap.techchalleng.best_food.domain.presenters.restaurante.create;
 
 import com.fiap.techchalleng.best_food.domain.generic.output.OutputInterface;
 import com.fiap.techchalleng.best_food.domain.generic.presenter.PresenterInterface;
-import com.fiap.techchalleng.best_food.domain.output.restaurante.StoreRestauranteOutput;
+import com.fiap.techchalleng.best_food.domain.output.restaurante.CreateRestauranteOutput;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class StoreRestaurantePresenter implements PresenterInterface {
+public class CreateRestaurantePresenter implements PresenterInterface {
 
-    private final StoreRestauranteOutput output;
+    private final CreateRestauranteOutput output;
 
-    public StoreRestaurantePresenter(StoreRestauranteOutput restauranteOutput) {
+    public CreateRestaurantePresenter(CreateRestauranteOutput restauranteOutput) {
         this.output = restauranteOutput;
     }
 
@@ -20,6 +20,8 @@ public class StoreRestaurantePresenter implements PresenterInterface {
         Map<String, Object> result = new HashMap<>();
         result.put("id", this.output.getRestaurante().id());
         result.put("nome", this.output.getRestaurante().nome());
+        result.put("capacidade", this.output.getRestaurante().capacidade());
+        result.put("tipoCozinha", this.output.getRestaurante().tipoCozinha());
         return result;
     }
 

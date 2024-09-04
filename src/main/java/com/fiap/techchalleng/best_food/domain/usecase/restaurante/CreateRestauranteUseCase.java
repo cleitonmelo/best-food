@@ -1,37 +1,40 @@
-package com.fiap.techchalleng.best_food.domain.usecase;
+package com.fiap.techchalleng.best_food.domain.usecase.restaurante;
 
 import com.fiap.techchalleng.best_food.domain.entity.restaurante.Restaurante;
-import com.fiap.techchalleng.best_food.domain.gateway.restaurante.StoreRestauranteInterface;
+import com.fiap.techchalleng.best_food.domain.gateway.restaurante.RestauranteInterface;
 import com.fiap.techchalleng.best_food.domain.generic.output.OutputError;
 import com.fiap.techchalleng.best_food.domain.generic.output.OutputInterface;
 import com.fiap.techchalleng.best_food.domain.generic.output.OutputStatus;
-import com.fiap.techchalleng.best_food.domain.input.restaurante.StoreRestauranteInput;
-import com.fiap.techchalleng.best_food.domain.output.restaurante.StoreRestauranteOutput;
+import com.fiap.techchalleng.best_food.domain.input.restaurante.CreateRestauranteInput;
+import com.fiap.techchalleng.best_food.domain.output.restaurante.CreateRestauranteOutput;
+import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 @Getter
 @RequiredArgsConstructor
-public class StoreRestauranteUseCase {
+public class CreateRestauranteUseCase {
 
-    private final StoreRestauranteInterface repository;
+    private final RestauranteInterface repository;
     private OutputInterface output;
 
-    public void execute(StoreRestauranteInput input) {
+    public void execute(@Valid CreateRestauranteInput input) {
         try {
             Restaurante restaurante = Restaurante.builder()
                     .nome(input.nome())
+                    .tipoCozinha(input.tipoCozinha())
+                    .capacidade(input.capacidade())
                     .build();
 
-            Restaurante data = this.repository.storeRestaurante(restaurante);
+            Restaurante data = this.repository.createRestaurante(restaurante);
 
-            this.output = StoreRestauranteOutput.builder()
+            this.output = CreateRestauranteOutput.builder()
                     .restaurante(data)
                     .outputStatus(this.getStatusCodeCreated())
                     .build();
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             this.output = OutputError.builder()
                     .message(e.getMessage())
                     .outputStatus(this.getStatusCodeBadRequest(e.getMessage()))
@@ -53,8 +56,8 @@ public class StoreRestauranteUseCase {
     private OutputStatus getStatusCodeBadRequest(String message)
     {
         return OutputStatus.builder()
-                .code(HttpStatus.BAD_REQUEST.value())
-                .codeName(HttpStatus.BAD_REQUEST.name())
+                .code(HttpStatus.UNPROCESSABLE_ENTITY.value())
+                .codeName(HttpStatus.UNPROCESSABLE_ENTITY.name())
                 .message(message)
                 .build();
     }

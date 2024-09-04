@@ -5,4 +5,6 @@ public enum TipoCozinha {
     BRASILEIRA,
     ITALIANA,
     MEXICANA,
+    AFRICANA,
+    KOREANA,
 }
