@@ -1,5 +1,6 @@
 package com.fiap.techchalleng.best_food.domain.usecase.restaurante;
 
+import com.fiap.techchalleng.best_food.domain.entity.restaurante.Mesa;
 import com.fiap.techchalleng.best_food.domain.entity.restaurante.Restaurante;
 import com.fiap.techchalleng.best_food.domain.gateway.restaurante.RestauranteInterface;
 import com.fiap.techchalleng.best_food.domain.generic.output.OutputError;
@@ -11,6 +12,8 @@ import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+
+import java.util.ArrayList;
 
 @Getter
 @RequiredArgsConstructor
@@ -27,7 +30,13 @@ public class CreateRestauranteUseCase {
                     .capacidade(input.capacidade())
                     .build();
 
-            Restaurante data = this.repository.createRestaurante(restaurante);
+            // @todo receber do input do create
+            ArrayList<Mesa> mesas = new ArrayList<>();
+            mesas.add(Mesa.builder().codigo(1).lugares(6).reservada(false).build());
+            mesas.add(Mesa.builder().codigo(2).lugares(6).reservada(false).build());
+            mesas.add(Mesa.builder().codigo(3).lugares(6).reservada(false).build());
+
+            Restaurante data = this.repository.createRestaurante(restaurante, mesas);
 
             this.output = CreateRestauranteOutput.builder()
                     .restaurante(data)

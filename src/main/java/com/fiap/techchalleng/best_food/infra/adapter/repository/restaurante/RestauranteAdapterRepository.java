@@ -1,8 +1,11 @@
 package com.fiap.techchalleng.best_food.infra.adapter.repository.restaurante;
 
+import com.fiap.techchalleng.best_food.domain.entity.restaurante.Mesa;
 import com.fiap.techchalleng.best_food.domain.entity.restaurante.Restaurante;
 import com.fiap.techchalleng.best_food.domain.gateway.restaurante.RestauranteInterface;
+import com.fiap.techchalleng.best_food.infra.model.MesaModel;
 import com.fiap.techchalleng.best_food.infra.model.RestauranteModel;
+import com.fiap.techchalleng.best_food.infra.repository.MesaRepository;
 import com.fiap.techchalleng.best_food.infra.repository.RestauranteRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -13,6 +16,8 @@ import java.util.UUID;
 public class RestauranteAdapterRepository implements RestauranteInterface {
 
     private final RestauranteRepository repository;
+
+    private final MesaRepository mesaRepository;
 
     @Override
     public List<Restaurante> buscaRestaurantes() {
@@ -25,22 +30,34 @@ public class RestauranteAdapterRepository implements RestauranteInterface {
     }
 
     @Override
-    public Restaurante createRestaurante(Restaurante restaurante) {
+    public Restaurante createRestaurante(Restaurante restaurante, List<Mesa> mesas) {
         UUID uuid = UUID.randomUUID();
 
         RestauranteModel model = RestauranteModel.builder()
                 .id(uuid)
                 .name(restaurante.nome())
-                .capacidade(restaurante.capacidade())
                 .tipoCozinha(restaurante.tipoCozinha())
                 .build();
 
         repository.save(model);
 
+        // @todo lista de mesas recebidas no momento do cadastro
+        for (Mesa mesa : mesas) {
+            MesaModel mesaModel = MesaModel.builder()
+                    .id(UUID.randomUUID())
+                    .idRestaurante(uuid)
+                    .codigo(mesa.codigo())
+                    .lugares(mesa.lugares())
+                    .reservada(mesa.reservada())
+                    .build();
+
+            mesaRepository.save(mesaModel);
+        }
+
         return Restaurante.builder()
                 .id(uuid)
                 .nome(restaurante.nome())
-                .capacidade(restaurante.capacidade())
+                .capacidade(100) //@todo incluir getTotalLugares
                 .tipoCozinha(restaurante.tipoCozinha())
                 .build();
     }

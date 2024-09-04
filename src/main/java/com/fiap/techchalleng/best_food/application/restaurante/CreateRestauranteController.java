@@ -9,6 +9,7 @@ import com.fiap.techchalleng.best_food.domain.output.restaurante.CreateRestauran
 import com.fiap.techchalleng.best_food.domain.presenters.restaurante.create.CreateRestaurantePresenter;
 import com.fiap.techchalleng.best_food.domain.usecase.restaurante.CreateRestauranteUseCase;
 import com.fiap.techchalleng.best_food.infra.adapter.repository.restaurante.RestauranteAdapterRepository;
+import com.fiap.techchalleng.best_food.infra.repository.MesaRepository;
 import com.fiap.techchalleng.best_food.infra.repository.RestauranteRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class CreateRestauranteController {
 
     @Autowired
     private RestauranteRepository restauranteRepository;
+
+    @Autowired
+    private MesaRepository restauranteMesaRepository;
 
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody CreateRestauranteRequest request) {
@@ -46,7 +50,7 @@ public class CreateRestauranteController {
                 .build();
 
         CreateRestauranteUseCase useCase = new CreateRestauranteUseCase(
-                new RestauranteAdapterRepository(restauranteRepository)
+                new RestauranteAdapterRepository(restauranteRepository, restauranteMesaRepository)
         );
 
         useCase.execute(input);

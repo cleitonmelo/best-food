@@ -37,9 +37,4 @@ public class RestauranteModel {
 
     private String bairro;
 
-    @Column(nullable = false)
-    private Integer capacidade;
-
-
-
 }
