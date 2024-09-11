@@ -42,7 +42,6 @@ public class CreateRestauranteUseCase {
                     .restaurante(data)
                     .outputStatus(this.getStatusCodeCreated())
                     .build();
-
         } catch (Exception e) {
             this.output = OutputError.builder()
                     .message(e.getMessage())
