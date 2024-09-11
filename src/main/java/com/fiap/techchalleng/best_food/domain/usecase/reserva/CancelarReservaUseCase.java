@@ -5,7 +5,6 @@ import com.fiap.techchalleng.best_food.domain.gateway.reserva.ReservaInterface;
 import com.fiap.techchalleng.best_food.domain.generic.output.OutputInterface;
 import com.fiap.techchalleng.best_food.domain.generic.output.OutputStatus;
 import com.fiap.techchalleng.best_food.domain.output.reserva.CancelarReservaOutput;
-import com.fiap.techchalleng.best_food.domain.output.reserva.CreateReservaOutput;
 import com.fiap.techchalleng.best_food.domain.usecase.base.BaseUseCase;
 import com.fiap.techchalleng.best_food.infra.model.ReservaModel;
 import jakarta.transaction.Transactional;
@@ -13,7 +12,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
-
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;

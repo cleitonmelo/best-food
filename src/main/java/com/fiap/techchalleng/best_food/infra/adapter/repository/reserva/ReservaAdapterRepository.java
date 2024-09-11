@@ -2,7 +2,9 @@ package com.fiap.techchalleng.best_food.infra.adapter.repository.reserva;
 
 import com.fiap.techchalleng.best_food.domain.entity.reserva.Reserva;
 import com.fiap.techchalleng.best_food.domain.gateway.reserva.ReservaInterface;
+import com.fiap.techchalleng.best_food.infra.model.MesaModel;
 import com.fiap.techchalleng.best_food.infra.model.ReservaModel;
+import com.fiap.techchalleng.best_food.infra.repository.MesaRepository;
 import com.fiap.techchalleng.best_food.infra.repository.ReservaRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -14,6 +16,7 @@ import java.util.UUID;
 public class ReservaAdapterRepository implements ReservaInterface {
 
     private final ReservaRepository reservaRepository;
+    private final MesaRepository mesaRepository;
 
     @Override
     public Reserva createReserva(Reserva reserva) {
@@ -34,6 +37,10 @@ public class ReservaAdapterRepository implements ReservaInterface {
 
         reserva.setId(uuid);
 
+        MesaModel mesa = mesaRepository.findById(reserva.getIdMesa()).get();
+        mesa.setReservada(true);
+        mesaRepository.save(mesa);
+
         return reserva;
 
     }
@@ -53,6 +60,10 @@ public class ReservaAdapterRepository implements ReservaInterface {
                 .build();
 
         reservaRepository.save(model);
+
+        MesaModel mesa = mesaRepository.findById(reserva.getIdMesa()).get();
+        mesa.setReservada(false);
+        mesaRepository.save(mesa);
 
         return reserva;
     }

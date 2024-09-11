@@ -20,7 +20,6 @@ import java.util.Optional;
 public class CreateReservaUseCase extends BaseUseCase {
 
     private final ReservaInterface reservaRepository;
-    //private final RestauranteInterface restauranteRepository;
     private OutputInterface output;
 
     public void execute(@Valid CreateReservaInput input) {
@@ -41,7 +40,6 @@ public class CreateReservaUseCase extends BaseUseCase {
         }
 
         Reserva data = reservaRepository.createReserva(reserva);
-        //Restaurante restaurante = restauranteRepository.getRestauranteById(input.idRestaurante());
 
         output = new CreateReservaOutput(
                 data,

@@ -3,7 +3,6 @@ package com.fiap.techchalleng.best_food.domain.presenters.reserva.create;
 import com.fiap.techchalleng.best_food.domain.generic.output.OutputInterface;
 import com.fiap.techchalleng.best_food.domain.generic.presenter.PresenterInterface;
 import com.fiap.techchalleng.best_food.domain.output.reserva.CreateReservaOutput;
-
 import java.util.HashMap;
 import java.util.Map;
 

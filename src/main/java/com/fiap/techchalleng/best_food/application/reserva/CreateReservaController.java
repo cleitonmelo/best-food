@@ -9,6 +9,7 @@ import com.fiap.techchalleng.best_food.domain.output.reserva.CreateReservaOutput
 import com.fiap.techchalleng.best_food.domain.presenters.reserva.create.CreateReservaPresenter;
 import com.fiap.techchalleng.best_food.domain.usecase.reserva.CreateReservaUseCase;
 import com.fiap.techchalleng.best_food.infra.adapter.repository.reserva.ReservaAdapterRepository;
+import com.fiap.techchalleng.best_food.infra.repository.MesaRepository;
 import com.fiap.techchalleng.best_food.infra.repository.ReservaRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ public class CreateReservaController {
 
 
     private final ReservaRepository reservaRepository;
+    private final MesaRepository mesaRepository;
 
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody CreateReservaRequest request) {
@@ -51,7 +53,7 @@ public class CreateReservaController {
                 .build();
 
         CreateReservaUseCase useCase = new CreateReservaUseCase(
-                new ReservaAdapterRepository(reservaRepository)
+                new ReservaAdapterRepository(reservaRepository, mesaRepository)
         );
 
         useCase.execute(input);
