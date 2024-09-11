@@ -3,6 +3,7 @@ package com.fiap.techchalleng.best_food.application.restaurante;
 import com.fiap.techchalleng.best_food.application.response.GenericResponse;
 import com.fiap.techchalleng.best_food.application.response.PresenterResponse;
 import com.fiap.techchalleng.best_food.application.restaurante.request.CreateRestauranteRequest;
+import com.fiap.techchalleng.best_food.domain.entity.restaurante.Mesa;
 import com.fiap.techchalleng.best_food.domain.generic.output.OutputInterface;
 import com.fiap.techchalleng.best_food.domain.input.restaurante.CreateRestauranteInput;
 import com.fiap.techchalleng.best_food.domain.output.restaurante.CreateRestauranteOutput;
@@ -19,6 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/restaurantes")
@@ -46,7 +50,8 @@ public class CreateRestauranteController {
         CreateRestauranteInput input = CreateRestauranteInput.builder()
                 .nome(request.nome())
                 .tipoCozinha(request.tipoCozinha())
-                .capacidade(request.capacidade())
+                .capacidade(getCapacidade(request.mesas()))
+                .mesas(request.mesas())
                 .build();
 
         CreateRestauranteUseCase useCase = new CreateRestauranteUseCase(
@@ -56,5 +61,13 @@ public class CreateRestauranteController {
         useCase.execute(input);
 
         return useCase.getOutput();
+    }
+
+    private Integer getCapacidade(List<Mesa> mesas){
+        Integer capacidade = 0;
+        for ( Mesa mesa : mesas ){
+            capacidade += mesa.lugares();
+        }
+        return capacidade;
     }
 }

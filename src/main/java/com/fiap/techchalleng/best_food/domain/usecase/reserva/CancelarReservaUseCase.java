@@ -5,11 +5,13 @@ import com.fiap.techchalleng.best_food.domain.gateway.reserva.ReservaInterface;
 import com.fiap.techchalleng.best_food.domain.generic.output.OutputInterface;
 import com.fiap.techchalleng.best_food.domain.generic.output.OutputStatus;
 import com.fiap.techchalleng.best_food.domain.output.reserva.CancelarReservaOutput;
+import com.fiap.techchalleng.best_food.domain.usecase.base.BaseUseCase;
 import com.fiap.techchalleng.best_food.infra.model.ReservaModel;
 import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.http.HttpStatus;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
@@ -18,7 +20,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class CancelarReservaUseCase {
+public class CancelarReservaUseCase extends BaseUseCase {
 
     private final ReservaInterface reservaRepository;
     private OutputInterface output;
@@ -47,7 +49,7 @@ public class CancelarReservaUseCase {
 
         output = new CancelarReservaOutput(
                 data,
-                new OutputStatus(200, "Ok", "Reserva cancelada com sucesso")
+                this.getStatusCodeOutput("Reserva cancelada com sucesso", HttpStatus.OK)
         );
 
     }

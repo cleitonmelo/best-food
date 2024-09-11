@@ -6,16 +6,18 @@ import com.fiap.techchalleng.best_food.domain.generic.output.OutputInterface;
 import com.fiap.techchalleng.best_food.domain.generic.output.OutputStatus;
 import com.fiap.techchalleng.best_food.domain.input.reserva.CreateReservaInput;
 import com.fiap.techchalleng.best_food.domain.output.reserva.CreateReservaOutput;
+import com.fiap.techchalleng.best_food.domain.usecase.base.BaseUseCase;
 import com.fiap.techchalleng.best_food.infra.model.ReservaModel;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 
 import java.util.Optional;
 
 @Getter
 @RequiredArgsConstructor
-public class CreateReservaUseCase {
+public class CreateReservaUseCase extends BaseUseCase {
 
     private final ReservaInterface reservaRepository;
     private OutputInterface output;
@@ -41,7 +43,7 @@ public class CreateReservaUseCase {
 
         output = new CreateReservaOutput(
                 data,
-                new OutputStatus(201, "Created", "Reserva criada")
+                this.getStatusCodeOutput("Reserva Criada", HttpStatus.CREATED)
         );
 
     }

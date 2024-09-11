@@ -8,6 +8,7 @@ import com.fiap.techchalleng.best_food.domain.generic.output.OutputInterface;
 import com.fiap.techchalleng.best_food.domain.generic.output.OutputStatus;
 import com.fiap.techchalleng.best_food.domain.input.restaurante.CreateRestauranteInput;
 import com.fiap.techchalleng.best_food.domain.output.restaurante.CreateRestauranteOutput;
+import com.fiap.techchalleng.best_food.domain.usecase.base.BaseUseCase;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 
 @Getter
 @RequiredArgsConstructor
-public class CreateRestauranteUseCase {
+public class CreateRestauranteUseCase extends BaseUseCase {
 
     private final RestauranteInterface repository;
     private OutputInterface output;
@@ -27,48 +28,40 @@ public class CreateRestauranteUseCase {
             Restaurante restaurante = Restaurante.builder()
                     .nome(input.nome())
                     .tipoCozinha(input.tipoCozinha())
+                    .cep(input.cep())
+                    .logradouro(input.logradouro())
+                    .cidade(input.cidade())
+                    .bairro(input.bairro())
+                    .estado(input.estado())
                     .capacidade(input.capacidade())
                     .build();
 
-            // @todo receber do input do create
-            ArrayList<Mesa> mesas = new ArrayList<>();
-            mesas.add(Mesa.builder().codigo(1).lugares(6).reservada(false).build());
-            mesas.add(Mesa.builder().codigo(2).lugares(6).reservada(false).build());
-            mesas.add(Mesa.builder().codigo(3).lugares(6).reservada(false).build());
-
-            Restaurante data = this.repository.createRestaurante(restaurante, mesas);
+            Restaurante data = this.repository.createRestaurante(restaurante, this.getMesas(input));
 
             this.output = CreateRestauranteOutput.builder()
                     .restaurante(data)
-                    .outputStatus(this.getStatusCodeCreated())
+                    .outputStatus(this.getStatusCodeOutput(
+                            "Restaurante Cadastrado com Sucesso", HttpStatus.CREATED))
                     .build();
 
         } catch (Exception e) {
             this.output = OutputError.builder()
                     .message(e.getMessage())
-                    .outputStatus(this.getStatusCodeBadRequest(e.getMessage()))
+                    .outputStatus(this.getStatusCodeOutput(
+                            e.getMessage(),HttpStatus.UNPROCESSABLE_ENTITY))
                     .build();
         }
 
     }
 
-    //@todo refactory criar classe com responsabilidade de montar esse retorno
-    private OutputStatus getStatusCodeCreated()
-    {
-        return OutputStatus.builder()
-                .code(HttpStatus.CREATED.value())
-                .codeName(HttpStatus.CREATED.name())
-                .message("Restaurante Criado com sucesso")
-                .build();
+    private ArrayList<Mesa> getMesas(CreateRestauranteInput input){
+        ArrayList<Mesa> mesas = new ArrayList<>();
+        for (Mesa mesa : input.mesas()) {
+            mesas.add(Mesa.builder()
+                    .codigo(mesa.codigo())
+                    .lugares(mesa.lugares())
+                    .reservada(false).build());
+        }
+        return mesas;
     }
-
-    private OutputStatus getStatusCodeBadRequest(String message)
-    {
-        return OutputStatus.builder()
-                .code(HttpStatus.UNPROCESSABLE_ENTITY.value())
-                .codeName(HttpStatus.UNPROCESSABLE_ENTITY.name())
-                .message(message)
-                .build();
-    }
-
 }

@@ -20,8 +20,9 @@ public class CreateRestaurantePresenter implements PresenterInterface {
         Map<String, Object> result = new HashMap<>();
         result.put("id", this.output.getRestaurante().id());
         result.put("nome", this.output.getRestaurante().nome());
-        result.put("capacidade", this.output.getRestaurante().capacidade());
+        result.put("capacidade", this.output.getRestaurante().capacidadeTotal());
         result.put("tipoCozinha", this.output.getRestaurante().tipoCozinha());
+        result.put("mesas", this.output.getRestaurante().mesas());
         return result;
     }
 
