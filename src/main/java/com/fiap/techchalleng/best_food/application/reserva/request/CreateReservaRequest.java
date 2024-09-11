@@ -13,6 +13,4 @@ public record CreateReservaRequest(
         Integer qtdeLugares,
         LocalDate dataReserva,
         LocalTime horaReserva
-
-) {
-}
+) {}
