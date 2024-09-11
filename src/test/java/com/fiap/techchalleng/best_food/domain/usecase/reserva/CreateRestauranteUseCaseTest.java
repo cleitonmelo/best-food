@@ -53,7 +53,10 @@ public class CreateRestauranteUseCaseTest {
         when(restauranteInterface.createRestaurante(restaurante,mesas)).thenReturn(restaurante);
 
         var restauranteInput = CreateRestauranteInput.builder()
-                .nome(restaurante.nome()).tipoCozinha(restaurante.tipoCozinha()).build();
+                .nome(restaurante.nome())
+                .tipoCozinha(restaurante.tipoCozinha())
+                .mesas(mesas)
+                .build();
 
         createRestauranteUseCase.execute(restauranteInput);
 

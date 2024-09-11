@@ -11,7 +11,8 @@ public record Restaurante(
         UUID id,
         String nome,
         TipoCozinha tipoCozinha,
-        Integer capacidade
+        Integer capacidade,
+        List<Mesa> mesas
 ) {
 
 }
