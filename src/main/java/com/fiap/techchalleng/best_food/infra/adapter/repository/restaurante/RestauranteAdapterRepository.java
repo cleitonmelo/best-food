@@ -57,7 +57,7 @@ public class RestauranteAdapterRepository implements RestauranteInterface {
         return Restaurante.builder()
                 .id(uuid)
                 .nome(restaurante.nome())
-                .capacidade(100) //@todo incluir getTotalLugares
+                .capacidade(restaurante.capacidade())
                 .tipoCozinha(restaurante.tipoCozinha())
                 .mesas(mesas)
                 .build();

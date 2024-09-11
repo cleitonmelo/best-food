@@ -12,7 +12,20 @@ public record Restaurante(
         String nome,
         TipoCozinha tipoCozinha,
         Integer capacidade,
+        String logradouro,
+        String cidade,
+        String estado,
+        String cep,
+        String bairro,
         List<Mesa> mesas
 ) {
 
+    public Integer capacidadeTotal()
+    {
+        Integer capacidadeTotal = 0;
+        for(Mesa mesa : mesas){
+            capacidadeTotal += mesa.lugares();
+        }
+        return capacidadeTotal;
+    }
 }
