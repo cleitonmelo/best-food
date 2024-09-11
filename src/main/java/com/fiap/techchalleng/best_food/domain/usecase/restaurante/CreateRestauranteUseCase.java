@@ -30,18 +30,13 @@ public class CreateRestauranteUseCase {
                     .capacidade(input.capacidade())
                     .build();
 
-            // @todo receber do input do create
-            ArrayList<Mesa> mesas = new ArrayList<>();
-            mesas.add(Mesa.builder().codigo(1).lugares(6).reservada(false).build());
-            mesas.add(Mesa.builder().codigo(2).lugares(6).reservada(false).build());
-            mesas.add(Mesa.builder().codigo(3).lugares(6).reservada(false).build());
-
-            Restaurante data = this.repository.createRestaurante(restaurante, mesas);
+            Restaurante data = this.repository.createRestaurante(restaurante, this.getMesas(input));
 
             this.output = CreateRestauranteOutput.builder()
                     .restaurante(data)
                     .outputStatus(this.getStatusCodeCreated())
                     .build();
+
         } catch (Exception e) {
             this.output = OutputError.builder()
                     .message(e.getMessage())
@@ -49,6 +44,16 @@ public class CreateRestauranteUseCase {
                     .build();
         }
 
+    }
+
+    private ArrayList<Mesa> getMesas(CreateRestauranteInput input){
+        ArrayList<Mesa> mesas = new ArrayList<>();
+        for (Mesa mesa : input.mesas()) {
+            mesas.add(Mesa.builder().codigo(1).lugares(6).reservada(false).build());
+            mesas.add(Mesa.builder().codigo(2).lugares(6).reservada(false).build());
+            mesas.add(Mesa.builder().codigo(3).lugares(6).reservada(false).build());
+        }
+        return mesas;
     }
 
     //@todo refactory criar classe com responsabilidade de montar esse retorno

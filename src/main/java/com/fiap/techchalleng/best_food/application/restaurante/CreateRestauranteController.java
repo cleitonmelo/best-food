@@ -47,6 +47,7 @@ public class CreateRestauranteController {
                 .nome(request.nome())
                 .tipoCozinha(request.tipoCozinha())
                 .capacidade(request.capacidade())
+                .mesas(request.mesas())
                 .build();
 
         CreateRestauranteUseCase useCase = new CreateRestauranteUseCase(
