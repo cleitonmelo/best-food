@@ -3,7 +3,6 @@ package com.fiap.techchalleng.best_food.domain.usecase.reserva;
 import com.fiap.techchalleng.best_food.domain.entity.reserva.Reserva;
 import com.fiap.techchalleng.best_food.domain.gateway.reserva.ReservaInterface;
 import com.fiap.techchalleng.best_food.domain.generic.output.OutputInterface;
-import com.fiap.techchalleng.best_food.domain.generic.output.OutputStatus;
 import com.fiap.techchalleng.best_food.domain.output.reserva.CancelarReservaOutput;
 import com.fiap.techchalleng.best_food.domain.usecase.base.BaseUseCase;
 import com.fiap.techchalleng.best_food.infra.model.ReservaModel;

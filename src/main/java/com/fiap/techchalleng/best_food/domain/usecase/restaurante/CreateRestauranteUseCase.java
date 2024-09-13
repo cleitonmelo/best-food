@@ -5,7 +5,6 @@ import com.fiap.techchalleng.best_food.domain.entity.restaurante.Restaurante;
 import com.fiap.techchalleng.best_food.domain.gateway.restaurante.RestauranteInterface;
 import com.fiap.techchalleng.best_food.domain.generic.output.OutputError;
 import com.fiap.techchalleng.best_food.domain.generic.output.OutputInterface;
-import com.fiap.techchalleng.best_food.domain.generic.output.OutputStatus;
 import com.fiap.techchalleng.best_food.domain.input.restaurante.CreateRestauranteInput;
 import com.fiap.techchalleng.best_food.domain.output.restaurante.CreateRestauranteOutput;
 import com.fiap.techchalleng.best_food.domain.usecase.base.BaseUseCase;

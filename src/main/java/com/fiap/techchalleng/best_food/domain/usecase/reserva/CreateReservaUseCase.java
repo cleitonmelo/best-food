@@ -3,7 +3,6 @@ package com.fiap.techchalleng.best_food.domain.usecase.reserva;
 import com.fiap.techchalleng.best_food.domain.entity.reserva.Reserva;
 import com.fiap.techchalleng.best_food.domain.gateway.reserva.ReservaInterface;
 import com.fiap.techchalleng.best_food.domain.generic.output.OutputInterface;
-import com.fiap.techchalleng.best_food.domain.generic.output.OutputStatus;
 import com.fiap.techchalleng.best_food.domain.input.reserva.CreateReservaInput;
 import com.fiap.techchalleng.best_food.domain.output.reserva.CreateReservaOutput;
 import com.fiap.techchalleng.best_food.domain.usecase.base.BaseUseCase;
@@ -12,7 +11,6 @@ import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-
 import java.util.Optional;
 
 @Getter
