@@ -7,7 +7,6 @@ import com.fiap.techchalleng.best_food.infra.model.ReservaModel;
 import com.fiap.techchalleng.best_food.infra.repository.MesaRepository;
 import com.fiap.techchalleng.best_food.infra.repository.ReservaRepository;
 import lombok.RequiredArgsConstructor;
-
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
@@ -37,9 +36,14 @@ public class ReservaAdapterRepository implements ReservaInterface {
 
         reserva.setId(uuid);
 
-        MesaModel mesa = mesaRepository.findById(reserva.getIdMesa()).get();
-        mesa.setReservada(true);
-        mesaRepository.save(mesa);
+        Optional<MesaModel> mesaOptional = mesaRepository.findById(reserva.getIdMesa());
+
+        if (mesaOptional.isPresent()) {
+            MesaModel mesa = mesaOptional.get();
+
+            mesa.setReservada(true);
+            mesaRepository.save(mesa);
+        }
 
         return reserva;
 
@@ -61,23 +65,26 @@ public class ReservaAdapterRepository implements ReservaInterface {
 
         reservaRepository.save(model);
 
-        MesaModel mesa = mesaRepository.findById(reserva.getIdMesa()).get();
-        mesa.setReservada(false);
-        mesaRepository.save(mesa);
+        Optional<MesaModel> mesaOptional = mesaRepository.findById(reserva.getIdMesa());
+
+        if (mesaOptional.isPresent()) {
+            MesaModel mesa = mesaOptional.get();
+
+            mesa.setReservada(false);
+            mesaRepository.save(mesa);
+        }
 
         return reserva;
     }
 
     @Override
     public Optional<ReservaModel> buscarReservaMesaDataHora(Reserva reserva) {
-        Optional<ReservaModel> mesaReservada = reservaRepository.findByIdMesaAndDataReservaEqualsAndHoraReservaEqualsAndDataCancelamentoReservaIsNull(reserva.getIdMesa(),reserva.getDataReserva(), reserva.getHoraReserva());
-        return mesaReservada;
+        return reservaRepository.findByIdMesaAndDataReservaEqualsAndHoraReservaEqualsAndDataCancelamentoReservaIsNull(reserva.getIdMesa(),reserva.getDataReserva(), reserva.getHoraReserva());
     }
 
     @Override
     public Optional<ReservaModel> buscarReserva(UUID id) {
-        Optional<ReservaModel> reserva = reservaRepository.findById(id);
-        return reserva;
+        return reservaRepository.findById(id);
     }
 
 }

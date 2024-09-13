@@ -15,5 +15,4 @@ public interface ReservaInterface {
 
     Optional<ReservaModel> buscarReserva(UUID id);
 
-
 }
