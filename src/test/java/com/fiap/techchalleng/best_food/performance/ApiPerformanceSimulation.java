@@ -15,6 +15,33 @@ public class ApiPerformanceSimulation extends Simulation {
             .baseUrl("http://localhost:8080")
             .header("Content-Type", "application/json");
 
+    ActionBuilder criarRestaurante = http("criar restaurante")
+            .post("/api/v1/restaurantes")
+            .body(StringBody(session -> {
+                return "{\n" +
+                        "    \"nome\": \"Restaurante de TESTE\",\n" +
+                        "    \"tipoCozinha\": \"BRASILEIRA\",\n" +
+                        "    \"mesas\": [\n" +
+                        "        {\n" +
+                        "            \"codigo\" : 1,\n" +
+                        "            \"lugares\" : 4\n" +
+                        "        },\n" +
+                        "        {\n" +
+                        "            \"codigo\" : 2,\n" +
+                        "            \"lugares\" : 4\n" +
+                        "        },\n" +
+                        "        {\n" +
+                        "            \"codigo\" : 3,\n" +
+                        "            \"lugares\" : 4\n" +
+                        "        }\n" +
+                        "    ]\n" +
+                        "}";
+            }))
+            .check(status().is(200))
+            .check(jsonPath("$.nome").saveAs("nome"))
+            .check(jsonPath("$.tipoCozinha").saveAs("tipoCozinha"))
+            .check(bodyString().saveAs("responseBody"));
+
     ActionBuilder criarReservaRequest = http("criar reserva")
             .post("/api/v1/reservas")
             .body(StringBody(session -> {
