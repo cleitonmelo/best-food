@@ -77,7 +77,7 @@ public class ApiPerformanceSimulation extends Simulation {
             //    System.out.println(session.getString("reservaId"));
             //    return session;
             //})
-            .exec(cancelarReservaRequest)
+            .exec(cancelarReservaRequest);
 
     {
         setUp(
