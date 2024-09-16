@@ -15,7 +15,7 @@ public class ApiPerformanceSimulation extends Simulation {
             .baseUrl("http://localhost:8080")
             .header("Content-Type", "application/json");
 
-    ActionBuilder criarRestaurante = http("criar restaurante")
+    ActionBuilder criarRestauranteRequest = http("criar restaurante")
             .post("/api/v1/restaurantes")
             .body(StringBody(session -> {
                 return "{\n" +
@@ -41,6 +41,9 @@ public class ApiPerformanceSimulation extends Simulation {
             .check(jsonPath("$.nome").saveAs("nome"))
             .check(jsonPath("$.tipoCozinha").saveAs("tipoCozinha"))
             .check(bodyString().saveAs("responseBody"));
+
+    ScenarioBuilder cenarioCadastrarRestaurante = scenario("criar restaurante")
+            .exec(criarRestauranteRequest);
 
     ActionBuilder criarReservaRequest = http("criar reserva")
             .post("/api/v1/reservas")
@@ -74,7 +77,7 @@ public class ApiPerformanceSimulation extends Simulation {
             //    System.out.println(session.getString("reservaId"));
             //    return session;
             //})
-            .exec(cancelarReservaRequest);
+            .exec(cancelarReservaRequest)
 
     {
         setUp(
@@ -95,7 +98,17 @@ public class ApiPerformanceSimulation extends Simulation {
                                 .during(Duration.ofSeconds(60)),
                         rampUsersPerSec(30)
                                 .to(1)
-                                .during(Duration.ofSeconds(10))))
+                                .during(Duration.ofSeconds(10))),
+                cenarioCadastrarRestaurante.injectOpen(
+                        rampUsersPerSec(1)
+                                .to(30)
+                                .during(Duration.ofSeconds(10)),
+                        constantUsersPerSec(30)
+                                .during(Duration.ofSeconds(60)),
+                        rampUsersPerSec(30)
+                                .to(1)
+                                .during(Duration.ofSeconds(10)))
+                )
                 .protocols(httpProtocol)
                 .assertions(
                         global().responseTime().max().lt(50),
