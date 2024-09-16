@@ -76,6 +76,13 @@
 			<version>5.3.0</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- relatorio de testes -->
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-junit5</artifactId>
+			<version>2.23.0</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>io.qameta.allure</groupId>
 			<artifactId>allure-rest-assured</artifactId>
