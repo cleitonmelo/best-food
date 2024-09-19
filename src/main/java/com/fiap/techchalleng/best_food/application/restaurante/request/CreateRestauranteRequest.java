@@ -13,6 +13,11 @@ public record CreateRestauranteRequest(
         String nome,
         TipoCozinha tipoCozinha,
         Integer capacidade,
+        String logradouro,
+        String cidade,
+        String estado,
+        String cep,
+        String bairro,
         List<Mesa> mesas
 ) {
 }

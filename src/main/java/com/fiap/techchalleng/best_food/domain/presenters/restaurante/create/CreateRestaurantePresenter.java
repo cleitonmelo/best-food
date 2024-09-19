@@ -22,6 +22,11 @@ public class CreateRestaurantePresenter implements PresenterInterface {
         result.put("nome", this.output.getRestaurante().nome());
         result.put("capacidade", this.output.getRestaurante().capacidadeTotal());
         result.put("tipoCozinha", this.output.getRestaurante().tipoCozinha());
+        result.put("logradouro",this.output.getRestaurante().logradouro());
+        result.put("bairro", this.output.getRestaurante().bairro());
+        result.put("cep", this.output.getRestaurante().cep());
+        result.put("cidade", this.output.getRestaurante().cidade());
+        result.put("estado", this.output.getRestaurante().estado());
         result.put("mesas", this.output.getRestaurante().mesas());
         return result;
     }

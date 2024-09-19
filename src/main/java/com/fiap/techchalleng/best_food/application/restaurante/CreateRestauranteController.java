@@ -51,6 +51,11 @@ public class CreateRestauranteController {
                 .nome(request.nome())
                 .tipoCozinha(request.tipoCozinha())
                 .capacidade(getCapacidade(request.mesas()))
+                .cep(request.cep())
+                .logradouro(request.logradouro())
+                .bairro(request.bairro())
+                .cidade(request.cidade())
+                .estado(request.estado())
                 .mesas(request.mesas())
                 .build();
 
