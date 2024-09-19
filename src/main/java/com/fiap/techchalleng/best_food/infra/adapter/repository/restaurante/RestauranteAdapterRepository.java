@@ -32,20 +32,39 @@ public class RestauranteAdapterRepository implements RestauranteInterface {
     @Override
     public Restaurante createRestaurante(Restaurante restaurante, List<Mesa> mesas) {
         UUID uuid = UUID.randomUUID();
-
         RestauranteModel model = RestauranteModel.builder()
                 .id(uuid)
                 .name(restaurante.nome())
                 .tipoCozinha(restaurante.tipoCozinha())
+                .logradouro(restaurante.logradouro())
+                .bairro(restaurante.bairro())
+                .cidade(restaurante.cidade())
+                .estado(restaurante.estado())
+                .cep(restaurante.cep())
                 .build();
 
         repository.save(model);
+        this.saveMesasByRestaurante(uuid,mesas);
 
-        // @todo lista de mesas recebidas no momento do cadastro
+        return Restaurante.builder()
+                .id(uuid)
+                .nome(restaurante.nome())
+                .capacidade(restaurante.capacidade())
+                .tipoCozinha(restaurante.tipoCozinha())
+                .logradouro(restaurante.logradouro())
+                .bairro(restaurante.bairro())
+                .cidade(restaurante.cidade())
+                .estado(restaurante.estado())
+                .cep(restaurante.cep())
+                .mesas(mesas)
+                .build();
+    }
+
+    private void saveMesasByRestaurante(UUID restaurante, List<Mesa> mesas){
         for (Mesa mesa : mesas) {
             MesaModel mesaModel = MesaModel.builder()
                     .id(UUID.randomUUID())
-                    .idRestaurante(uuid)
+                    .idRestaurante(restaurante)
                     .codigo(mesa.codigo())
                     .lugares(mesa.lugares())
                     .reservada(mesa.reservada())
@@ -53,13 +72,5 @@ public class RestauranteAdapterRepository implements RestauranteInterface {
 
             mesaRepository.save(mesaModel);
         }
-
-        return Restaurante.builder()
-                .id(uuid)
-                .nome(restaurante.nome())
-                .capacidade(restaurante.capacidade())
-                .tipoCozinha(restaurante.tipoCozinha())
-                .mesas(mesas)
-                .build();
     }
 }
