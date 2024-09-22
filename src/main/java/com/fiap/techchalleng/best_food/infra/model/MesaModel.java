@@ -4,10 +4,7 @@ package com.fiap.techchalleng.best_food.infra.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -17,6 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table( name = "mesas")
 @Setter
+@Getter
 public class MesaModel {
 
     @Id
