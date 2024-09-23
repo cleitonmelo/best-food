@@ -26,9 +26,6 @@ public class DefinicaoPassos extends BaseBdd{
 
     private Reserva reservaResponse;
 
-
-
-
     @Quando("submeter uma nova reserva")
     public Reserva submeterNovaReserva() {
 
@@ -83,6 +80,8 @@ public class DefinicaoPassos extends BaseBdd{
         var request = CreateRestauranteRequest.builder()
                 .nome("Restaurante")
                 .tipoCozinha(TipoCozinha.BRASILEIRA)
+                .bairro("teste")
+                .logradouro("Rua de teste")
                 .cidade("São Paulo")
                 .estado("SP")
                 .cep("75000-000")
