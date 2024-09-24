@@ -16,8 +16,8 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 @Table(name="restaurantes")
+@Getter
 public class RestauranteModel {
 
     @Id
@@ -29,19 +29,14 @@ public class RestauranteModel {
     @Column(nullable = false)
     private TipoCozinha tipoCozinha;
 
-    @Column(nullable = false)
     private String logradouro;
 
-    @Column(nullable = false)
     private String cidade;
 
-    @Column(nullable = false)
     private String estado;
 
-    @Column(nullable = false)
     private String cep;
 
-    @Column(nullable = false)
     private String bairro;
 
 }

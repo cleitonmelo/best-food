@@ -79,21 +79,22 @@ public class DefinicaoPassos extends BaseBdd{
         mesas.add(Mesa.builder().codigo(2).lugares(3).build());
         mesas.add(Mesa.builder().codigo(3).lugares(2).build());
 
-        var request = CreateRestauranteRequest.builder()
-                .nome("Restaurante")
-                .tipoCozinha(TipoCozinha.BRASILEIRA)
-                .bairro("teste")
-                .logradouro("Rua de teste")
-                .cidade("São Paulo")
-                .estado("SP")
-                .cep("75000-000")
-                .mesas(mesas)
-                .build();
+        var request = new CreateRestauranteRequest(
+                null,
+                "Restaurante de teste",
+                TipoCozinha.BRASILEIRA,
+                "Cidade Jardim",
+                "Rua Cidade Jardim, 168",
+                "São Paulo",
+                "SP",
+                "08799-000",
+                mesas);
 
         response = given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(request)
-                .when().post(this.getUriRestaurantes());
+                .when()
+                .post(this.getUriRestaurantes());
 
         return response.then().extract().as(Restaurante.class);
     }
