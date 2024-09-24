@@ -1,12 +1,12 @@
 package com.fiap.techchalleng.best_food.application.restaurante;
 
 import com.fiap.techchalleng.best_food.application.response.GenericResponse;
-import com.fiap.techchalleng.best_food.application.response.PresenterResponse;
+import com.fiap.techchalleng.best_food.application.response.PresenterListResponse;
 import com.fiap.techchalleng.best_food.domain.enums.restaurante.TipoCozinha;
 import com.fiap.techchalleng.best_food.domain.generic.output.OutputInterface;
 import com.fiap.techchalleng.best_food.domain.input.restaurante.BuscarRestauranteInput;
-import com.fiap.techchalleng.best_food.domain.output.restaurante.CreateRestauranteOutput;
-import com.fiap.techchalleng.best_food.domain.presenters.restaurante.create.CreateRestaurantePresenter;
+import com.fiap.techchalleng.best_food.domain.output.restaurante.BuscarRestauranteOutput;
+import com.fiap.techchalleng.best_food.domain.presenters.restaurante.find.BuscarRestaurantePresenter;
 import com.fiap.techchalleng.best_food.domain.usecase.restaurante.BuscarRestauranteUseCase;
 import com.fiap.techchalleng.best_food.infra.adapter.repository.restaurante.RestauranteAdapterRepository;
 import com.fiap.techchalleng.best_food.infra.repository.MesaRepository;
@@ -30,18 +30,18 @@ public class BuscarRestauranteController {
     private MesaRepository restauranteMesaRepository;
 
     @GetMapping
-    public ResponseEntity<Object> findByName(
+    public ResponseEntity<Object> find(
             @RequestParam(required = false) String nome,
             @RequestParam(required = false) String bairro,
             @RequestParam(required = false) TipoCozinha tipoCozinha){
         OutputInterface outputInterface = this.getOutputInterface(nome, bairro, tipoCozinha);
 
-        if ( outputInterface.getOutputStatus().getCode() != HttpStatus.CREATED.value() ) {
+        if ( outputInterface.getOutputStatus().getCode() != HttpStatus.OK.value() ) {
             return new GenericResponse().response(outputInterface);
         }
 
-        CreateRestaurantePresenter presenter = new CreateRestaurantePresenter((CreateRestauranteOutput) outputInterface);
-        return new PresenterResponse().response(presenter);
+        BuscarRestaurantePresenter presenter = new BuscarRestaurantePresenter((BuscarRestauranteOutput) outputInterface);
+        return new PresenterListResponse().response(presenter);
     }
 
     private OutputInterface getOutputInterface(String nome, String bairro, TipoCozinha tipoCozinha){
