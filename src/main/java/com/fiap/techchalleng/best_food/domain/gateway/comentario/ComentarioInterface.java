@@ -9,7 +9,7 @@ import com.fiap.techchalleng.best_food.infra.model.ComentarioModel;
 
 public interface ComentarioInterface {
 
-    Reserva createComentario(Comentario comentario);
+    Comentario createComentario(Comentario comentario);
 
     Optional<ComentarioModel> buscarComentario(UUID id);
 

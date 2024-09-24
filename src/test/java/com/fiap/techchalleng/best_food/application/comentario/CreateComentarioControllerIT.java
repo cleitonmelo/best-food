@@ -6,10 +6,12 @@ import static org.hamcrest.Matchers.hasKey;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Random;
 import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,12 +25,8 @@ import io.restassured.RestAssured;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-@Getter
-@RequiredArgsConstructor
-@RestController
-@RequestMapping("api/v1/comentarios")
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CreateComentarioControllerIT {
-
 
     @LocalServerPort
     private int port;
@@ -41,11 +39,7 @@ public class CreateComentarioControllerIT {
 
     @Test
     void devePermitirCriarComentario() {
-        var request = new CreateComentarioRequest(null,
-                UUID.randomUUID(),
-                "Esse é um comentário",
-                LocalDate.now(),
-                LocalTime.now());
+        var request = new CreateComentarioRequest(null, UUID.randomUUID(),"Comentario de Teste",LocalDate.now(),LocalTime.now());
 
         given()
                 .filter(new AllureRestAssured())
@@ -55,9 +49,9 @@ public class CreateComentarioControllerIT {
                 .post("api/v1/comentarios")
                 .then()
                 .statusCode(HttpStatus.OK.value())
-                .body("$", hasKey("id"))
                 .body("$", hasKey("idReserva"))
-                .body("$", hasKey("comentario"));
+                .body("$", hasKey("comentario"))
+                .body("comentario", equalTo(request.comentario()));
     }
     
     

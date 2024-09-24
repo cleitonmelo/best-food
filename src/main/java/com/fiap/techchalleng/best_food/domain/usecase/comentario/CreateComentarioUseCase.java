@@ -29,7 +29,7 @@ public class CreateComentarioUseCase extends BaseUseCase {
                 .horaComentario(input.horaComentario())
                 .build();
 
-        Comentario data = ComentarioRepository.createComentario(comentario);
+        Comentario data = comentarioRepository.createComentario(comentario);
 
         output = new CreateComentarioOutput(
                 data,

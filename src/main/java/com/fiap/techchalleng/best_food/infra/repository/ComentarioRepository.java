@@ -3,6 +3,7 @@ package com.fiap.techchalleng.best_food.infra.repository;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.fiap.techchalleng.best_food.domain.entity.comentario.Comentario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.fiap.techchalleng.best_food.infra.model.ComentarioModel;
