@@ -1,9 +1,14 @@
 package com.fiap.techchalleng.best_food.domain.entity.comentario;
 
+import lombok.Builder;
+import lombok.Data;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.UUID;
 
+@Builder
+@Data
 public class Comentario {
 
     private UUID id;

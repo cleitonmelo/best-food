@@ -1,11 +1,10 @@
-package com.fiap.techchalleng.best_food.domain.usecase.reserva;
+package com.fiap.techchalleng.best_food.domain.usecase.restaurante;
 
 import com.fiap.techchalleng.best_food.domain.entity.restaurante.Mesa;
 import com.fiap.techchalleng.best_food.domain.entity.restaurante.Restaurante;
 import com.fiap.techchalleng.best_food.domain.enums.restaurante.TipoCozinha;
 import com.fiap.techchalleng.best_food.domain.gateway.restaurante.RestauranteInterface;
 import com.fiap.techchalleng.best_food.domain.input.restaurante.CreateRestauranteInput;
-import com.fiap.techchalleng.best_food.domain.usecase.restaurante.CreateRestauranteUseCase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

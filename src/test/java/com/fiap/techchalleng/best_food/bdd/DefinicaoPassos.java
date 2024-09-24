@@ -5,11 +5,8 @@ import com.fiap.techchalleng.best_food.application.restaurante.request.CreateRes
 import com.fiap.techchalleng.best_food.domain.entity.reserva.Reserva;
 import com.fiap.techchalleng.best_food.domain.entity.restaurante.Mesa;
 import com.fiap.techchalleng.best_food.domain.entity.restaurante.Restaurante;
-<<<<<<< HEAD
 import com.fiap.techchalleng.best_food.domain.entity.comentario.Comentario;
 import com.fiap.techchalleng.best_food.application.comentario.request.CreateComentarioRequest;
-=======
->>>>>>> 258ecada1f4934dd3f1a1fd229fbf29d9d20f2b3
 import com.fiap.techchalleng.best_food.domain.enums.restaurante.TipoCozinha;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
@@ -31,12 +28,6 @@ public class DefinicaoPassos extends BaseBdd{
 
     private Reserva reservaResponse;
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 258ecada1f4934dd3f1a1fd229fbf29d9d20f2b3
     @Quando("submeter uma nova reserva")
     public Reserva submeterNovaReserva() {
 
