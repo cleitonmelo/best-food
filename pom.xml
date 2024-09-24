@@ -76,6 +76,13 @@
 			<version>5.3.0</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- relatorio de testes -->
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-junit5</artifactId>
+			<version>2.23.0</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>io.qameta.allure</groupId>
 			<artifactId>allure-rest-assured</artifactId>
@@ -92,6 +99,12 @@
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-junit-platform-engine</artifactId>
 			<version>7.13.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-suite</artifactId>
+			<version>1.9.3</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- Dependências do Gatling -->
@@ -120,6 +133,16 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<!-- allure pluggin -->
+			<plugin>
+				<groupId>io.qameta.allure</groupId>
+				<artifactId>allure-maven</artifactId>
+				<version>2.12.0</version>
+				<configuration>
+					<reportVersion>2.30.0</reportVersion>
+					<resultsDirectory>../allure-results</resultsDirectory>
 				</configuration>
 			</plugin>
 		</plugins>

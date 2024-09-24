@@ -38,7 +38,15 @@ public class CreateRestauranteControllerTest {
         mesas.add(Mesa.builder().codigo(3).lugares(2).build());
 
         var request = new CreateRestauranteRequest(null,
-                "Restaurante de Teste", TipoCozinha.AFRICANA, null, mesas);
+                "Restaurante de Teste",
+                TipoCozinha.AFRICANA,
+                null,
+                "Rua de teste",
+                "Cidade de teste",
+                "São Paulo",
+                "13456-780",
+                "Bairo de teste",
+                mesas);
 
         var presenter = controller.create(request);
 

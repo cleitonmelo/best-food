@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.UUID;
@@ -15,6 +16,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 @Table(name="restaurantes")
 public class RestauranteModel {
 
@@ -27,14 +29,19 @@ public class RestauranteModel {
     @Column(nullable = false)
     private TipoCozinha tipoCozinha;
 
+    @Column(nullable = false)
     private String logradouro;
 
+    @Column(nullable = false)
     private String cidade;
 
+    @Column(nullable = false)
     private String estado;
 
+    @Column(nullable = false)
     private String cep;
 
+    @Column(nullable = false)
     private String bairro;
 
 }
