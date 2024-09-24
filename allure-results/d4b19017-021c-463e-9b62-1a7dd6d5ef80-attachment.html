@@ -1,0 +1,56 @@
+<div>POST to http://localhost:61529/api/v1/reservas</div>
+
+<h4>Body</h4>
+<div>
+    <pre class="preformated-text">
+{
+    &quot;id&quot;: null,
+    &quot;idRestaurante&quot;: &quot;bf278ce9-dd8f-4d86-a8b4-7b847ffac6e0&quot;,
+    &quot;idMesa&quot;: &quot;73be7cc7-b134-4d30-88c9-cc7f2a448151&quot;,
+    &quot;nome&quot;: &quot;Nome&quot;,
+    &quot;telefone&quot;: &quot;(11) 98765-4321&quot;,
+    &quot;qtdeLugares&quot;: 5,
+    &quot;dataReserva&quot;: [
+        2024,
+        9,
+        19
+    ],
+    &quot;horaReserva&quot;: [
+        9,
+        27,
+        36,
+        6069000
+    ]
+}    </pre>
+</div>
+
+<h4>Headers</h4>
+<div>
+        <div>Accept: */*</div>
+        <div>Content-Type: application/json</div>
+</div>
+
+
+
+<h4>Curl</h4>
+<div>
+curl -v -X POST &#39;http://localhost:61529/api/v1/reservas&#39; -H &#39;Accept: */*&#39; -H &#39;Content-Type: application/json&#39; -d &#39;{
+    &quot;id&quot;: null,
+    &quot;idRestaurante&quot;: &quot;bf278ce9-dd8f-4d86-a8b4-7b847ffac6e0&quot;,
+    &quot;idMesa&quot;: &quot;73be7cc7-b134-4d30-88c9-cc7f2a448151&quot;,
+    &quot;nome&quot;: &quot;Nome&quot;,
+    &quot;telefone&quot;: &quot;(11) 98765-4321&quot;,
+    &quot;qtdeLugares&quot;: 5,
+    &quot;dataReserva&quot;: [
+        2024,
+        9,
+        19
+    ],
+    &quot;horaReserva&quot;: [
+        9,
+        27,
+        36,
+        6069000
+    ]
+}&#39;
+</div>
