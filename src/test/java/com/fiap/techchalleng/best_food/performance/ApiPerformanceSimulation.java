@@ -45,6 +45,13 @@ public class ApiPerformanceSimulation extends Simulation {
     ScenarioBuilder cenarioCadastrarRestaurante = scenario("criar restaurante")
             .exec(criarRestauranteRequest);
 
+    ActionBuilder buscarRestauranteRequest = http("criar restaurante")
+            .post("/api/v1/restaurantes")
+            .check(status().is(200));
+
+    ScenarioBuilder cenarioBuscarRestaurantes = scenario("buscar Restaurantes")
+            .exec(buscarRestauranteRequest);
+
     ActionBuilder criarReservaRequest = http("criar reserva")
             .post("/api/v1/reservas")
             .body(StringBody(session -> {
@@ -100,6 +107,15 @@ public class ApiPerformanceSimulation extends Simulation {
                                 .to(1)
                                 .during(Duration.ofSeconds(10))),
                 cenarioCadastrarRestaurante.injectOpen(
+                        rampUsersPerSec(1)
+                                .to(30)
+                                .during(Duration.ofSeconds(10)),
+                        constantUsersPerSec(30)
+                                .during(Duration.ofSeconds(60)),
+                        rampUsersPerSec(30)
+                                .to(1)
+                                .during(Duration.ofSeconds(10))),
+                cenarioBuscarRestaurantes.injectOpen(
                         rampUsersPerSec(1)
                                 .to(30)
                                 .during(Duration.ofSeconds(10)),
