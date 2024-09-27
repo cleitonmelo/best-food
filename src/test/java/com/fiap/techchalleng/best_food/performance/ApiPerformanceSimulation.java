@@ -45,8 +45,8 @@ public class ApiPerformanceSimulation extends Simulation {
     ScenarioBuilder cenarioCadastrarRestaurante = scenario("criar restaurante")
             .exec(criarRestauranteRequest);
 
-    ActionBuilder buscarRestauranteRequest = http("criar restaurante")
-            .post("/api/v1/restaurantes")
+    ActionBuilder buscarRestauranteRequest = http("buscar restaurantes")
+            .get("/api/v1/restaurantes")
             .check(status().is(200));
 
     ScenarioBuilder cenarioBuscarRestaurantes = scenario("buscar Restaurantes")
