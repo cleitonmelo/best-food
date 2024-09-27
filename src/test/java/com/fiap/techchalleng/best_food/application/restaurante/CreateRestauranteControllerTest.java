@@ -37,16 +37,15 @@ public class CreateRestauranteControllerTest {
         mesas.add(Mesa.builder().codigo(2).lugares(3).build());
         mesas.add(Mesa.builder().codigo(3).lugares(2).build());
 
-        var request = new CreateRestauranteRequest(null,
-                "Restaurante de Teste",
-                TipoCozinha.AFRICANA,
-                null,
-                "Rua de teste",
-                "Cidade de teste",
-                "São Paulo",
-                "13456-780",
-                "Bairo de teste",
-                mesas);
+        var request = CreateRestauranteRequest.builder()
+                .bairro("Cidade Jardim")
+                .cidade("São Paulo")
+                .estado("SP")
+                .cep("078555-000")
+                .nome("Restaurante de Teste")
+                .tipoCozinha(TipoCozinha.BRASILEIRA)
+                .mesas(mesas)
+                .build();
 
         var presenter = controller.create(request);
 

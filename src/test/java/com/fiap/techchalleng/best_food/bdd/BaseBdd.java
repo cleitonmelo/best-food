@@ -13,4 +13,11 @@ abstract class BaseBdd {
     {
         return URI + "/restaurantes";
     }
+
+    public String getUriComentarios()
+    {
+
+        return URI + "/comentarios";
+    }
+
 }

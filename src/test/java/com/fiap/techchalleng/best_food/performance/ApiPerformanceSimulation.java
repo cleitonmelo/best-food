@@ -86,6 +86,27 @@ public class ApiPerformanceSimulation extends Simulation {
             //})
             .exec(cancelarReservaRequest);
 
+   ActionBuilder criarComentarioRequest = http("criar reserva")
+            .post("/api/v1/comentarios")
+            .body(StringBody(session -> {
+                String randomDate = RandomDateTimeGenerator.generateRandomDate();
+                String randomTime = RandomDateTimeGenerator.generateRandomTime();
+                return "{ " +
+                        "\"idReserva\": \"592ac344-9f12-40cd-8ed9-1fde6ad9006e\"," +
+                        "\"comentario\": \"Novo comentario\"," +
+                        "\"dataComentario\": \"" + randomDate + "\"," +
+                        "\"horaComentario\": \"" + randomTime + "\"" +
+                        "}";
+            }))
+            .check(status().is(200))
+            .check(jsonPath("$.id").saveAs("comentarioId"))
+            .check(bodyString().saveAs("responseBody"));
+
+
+   ScenarioBuilder cenarioCriarComentario = scenario("criar comentario")
+           .exec(criarComentarioRequest);
+
+
     {
         setUp(
                 cenarioCriarReserva.injectOpen(
@@ -106,6 +127,15 @@ public class ApiPerformanceSimulation extends Simulation {
                         rampUsersPerSec(30)
                                 .to(1)
                                 .during(Duration.ofSeconds(10))),
+                cenarioCriarComentario.injectOpen(
+                        rampUsersPerSec(1)
+                                .to(10)
+                                .during(Duration.ofSeconds(10)),
+                        constantUsersPerSec(10)
+                                .during(Duration.ofSeconds(60)),
+                        rampUsersPerSec(10)
+                                .to(1)
+                                .during(Duration.ofSeconds(10))),
                 cenarioCadastrarRestaurante.injectOpen(
                         rampUsersPerSec(1)
                                 .to(30)
@@ -123,8 +153,7 @@ public class ApiPerformanceSimulation extends Simulation {
                                 .during(Duration.ofSeconds(60)),
                         rampUsersPerSec(30)
                                 .to(1)
-                                .during(Duration.ofSeconds(10)))
-                )
+                                .during(Duration.ofSeconds(10))))
                 .protocols(httpProtocol)
                 .assertions(
                         global().responseTime().max().lt(50),

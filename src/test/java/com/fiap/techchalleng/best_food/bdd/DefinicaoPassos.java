@@ -5,6 +5,8 @@ import com.fiap.techchalleng.best_food.application.restaurante.request.CreateRes
 import com.fiap.techchalleng.best_food.domain.entity.reserva.Reserva;
 import com.fiap.techchalleng.best_food.domain.entity.restaurante.Mesa;
 import com.fiap.techchalleng.best_food.domain.entity.restaurante.Restaurante;
+import com.fiap.techchalleng.best_food.domain.entity.comentario.Comentario;
+import com.fiap.techchalleng.best_food.application.comentario.request.CreateComentarioRequest;
 import com.fiap.techchalleng.best_food.domain.enums.restaurante.TipoCozinha;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
@@ -83,19 +85,22 @@ public class DefinicaoPassos extends BaseBdd{
         mesas.add(Mesa.builder().codigo(2).lugares(3).build());
         mesas.add(Mesa.builder().codigo(3).lugares(2).build());
 
-        var request = CreateRestauranteRequest.builder()
-                .nome("Restaurante")
-                .tipoCozinha(TipoCozinha.BRASILEIRA)
-                .cidade("São Paulo")
-                .estado("SP")
-                .cep("75000-000")
-                .mesas(mesas)
-                .build();
+        var request = new CreateRestauranteRequest(
+                null,
+                "Restaurante de teste",
+                TipoCozinha.BRASILEIRA,
+                "Cidade Jardim",
+                "Rua Cidade Jardim, 168",
+                "São Paulo",
+                "SP",
+                "08799-000",
+                mesas);
 
         response = given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(request)
-                .when().post(this.getUriRestaurantes());
+                .when()
+                .post(this.getUriRestaurantes());
 
         return response.then().extract().as(Restaurante.class);
     }
@@ -129,5 +134,25 @@ public class DefinicaoPassos extends BaseBdd{
                 .statusCode(HttpStatus.OK.value());
     }
 
+    @Quando("submeter um novo comentário")
+    public Comentario submeterNovoComentario() {
 
+        var comentarioRequest = new CreateComentarioRequest(null,
+                UUID.randomUUID(),
+                "Novo comentário",
+                LocalDate.now(),
+                LocalTime.now());
+
+        response = given()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .body(comentarioRequest)
+                .when().post(this.getUriComentarios());
+        return response.then().extract().as(Comentario.class);
+    }
+
+    @Então("o comentário é cadastrado com sucesso")
+    public void comentarioRegistradoComSucesso() {
+        response.then()
+                .statusCode(HttpStatus.OK.value());
+    }
 }

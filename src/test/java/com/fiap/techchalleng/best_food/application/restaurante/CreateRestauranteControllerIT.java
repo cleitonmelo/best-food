@@ -43,6 +43,11 @@ public class CreateRestauranteControllerIT {
         var request = CreateRestauranteRequest.builder()
                 .tipoCozinha(TipoCozinha.BRASILEIRA)
                 .nome("Restaurante Brasileiro")
+                .bairro("teste")
+                .cep("078889900")
+                .estado("SP")
+                .cidade("São Paulo")
+                .logradouro("Rua do Sul")
                 .mesas(mesas)
                 .build();
 
