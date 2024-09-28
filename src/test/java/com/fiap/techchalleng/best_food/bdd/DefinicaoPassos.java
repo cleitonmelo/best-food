@@ -31,9 +31,6 @@ public class DefinicaoPassos extends BaseBdd{
 
     private List<Restaurante> restauranteList;
 
-
-
-
     @Quando("submeter uma nova reserva")
     public Reserva submeterNovaReserva() {
 
@@ -121,7 +118,8 @@ public class DefinicaoPassos extends BaseBdd{
 
         Response response = given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when().get(this.getUriRestaurantes());
+                .when()
+                .get(this.getUriRestaurantes());
 
         Restaurante[] restaurantesArray = response.then().extract().as(Restaurante[].class);
 
