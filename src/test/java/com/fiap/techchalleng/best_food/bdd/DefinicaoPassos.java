@@ -17,6 +17,7 @@ import org.springframework.http.MediaType;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,6 +28,8 @@ public class DefinicaoPassos extends BaseBdd{
     private Response response;
 
     private Reserva reservaResponse;
+
+    private List<Restaurante> restauranteList;
 
     @Quando("submeter uma nova reserva")
     public Reserva submeterNovaReserva() {
@@ -101,6 +104,30 @@ public class DefinicaoPassos extends BaseBdd{
 
     @Então("o restaurante é cadastrado com sucesso")
     public void restauranteCadastradoComSucesso() {
+        response.then()
+                .statusCode(HttpStatus.OK.value());
+    }
+
+    @Dado("que existem restaurantes cadastrados")
+    public void existeRestaurante(){
+        restauranteList = List.of(submeterNovoRestaurante());
+    }
+
+    @Quando("buscar restaurantes sem filtro")
+    public List<Restaurante> buscaRestaurantesSemFiltro(){
+
+        Response response = given()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .when()
+                .get(this.getUriRestaurantes());
+
+        Restaurante[] restaurantesArray = response.then().extract().as(Restaurante[].class);
+
+        return Arrays.asList(restaurantesArray);
+    }
+
+    @Então("deve retornar todos os restaurantes cadastrados")
+    public void restauranteRetornadoComSucesso(){
         response.then()
                 .statusCode(HttpStatus.OK.value());
     }
