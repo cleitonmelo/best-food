@@ -1,7 +1,7 @@
 # language: pt
 Funcionalidade: API - Comentarios
 
-  Cenário: Cadastrar um novo comentario
-    Quando submeter um novo comentario
-    Então o comentario é cadastrado com sucesso
+  Cenário: Cadastrar um novo comentário
+    Quando submeter um novo comentário
+    Então o comentário é cadastrado com sucesso
 
