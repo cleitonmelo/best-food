@@ -86,7 +86,7 @@ public class ApiPerformanceSimulation extends Simulation {
             //})
             .exec(cancelarReservaRequest);
 
-   ActionBuilder criarComentarioRequest = http("criar reserva")
+   ActionBuilder criarComentarioRequest = http("criar comentario")
             .post("/api/v1/comentarios")
             .body(StringBody(session -> {
                 String randomDate = RandomDateTimeGenerator.generateRandomDate();
