@@ -27,20 +27,20 @@ public class BuscarMesaUseCase extends BaseUseCase {
             List<Mesa> data = List.of();
 
             if(input.reservada() == null){
-                data = this.repository.getMesas();
+                data = this.repository.getMesasByIdRestaurante(input.idRestaurante());
             }
 
             if(!data.isEmpty()) {
                 this.output = BuscarMesaOutput.builder()
                         .mesaList(data)
                         .outputStatus(this.getStatusCodeOutput(
-                                "Restaurante encontrado com sucesso.", HttpStatus.OK))
+                                "Mesa encontrado com sucesso.", HttpStatus.OK))
                         .build();
             } else {
                 this.output = BuscarMesaOutput.builder()
                         .mesaList(data)
                         .outputStatus(this.getStatusCodeOutput(
-                                "Restaurante não encontrado de acordo com os filtros de busca.", HttpStatus.NOT_FOUND))
+                                "Mesa não encontrado de acordo com os filtros de busca.", HttpStatus.NOT_FOUND))
                         .build();
             }
         } catch (Exception e) {

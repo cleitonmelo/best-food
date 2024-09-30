@@ -6,6 +6,7 @@ import java.util.UUID;
 
 public interface MesaInterface {
     List<Mesa> getMesas();
+    List<Mesa> getMesasByIdRestaurante(UUID idRestaurante);
     Mesa findByIdMesa(UUID id);
     List<Mesa> getMesasByReservada(Boolean reservada);
     Mesa createMesa(Mesa mesa);

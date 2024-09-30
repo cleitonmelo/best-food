@@ -11,6 +11,7 @@ import java.util.UUID;
 @Repository
 public interface MesaRepository extends JpaRepository<MesaModel, UUID> {
     List<MesaModel> findByIdRestaurante(UUID idRestaurante);
+    List<MesaModel> findByIdRestauranteAndReservada(UUID idRestaurante);
     //List<MesaModel> findByIdMesa(UUID idMesa);
 //    MesaModel updateByIdMesa(UUID idMesa, MesaModel mesa);
 //    MesaModel createMesa(MesaModel mesa);

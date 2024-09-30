@@ -24,6 +24,15 @@ public class MesaAdapterRepository implements MesaInterface {
     }
 
     @Override
+    public List<Mesa> getMesasByIdRestaurante(UUID idRestaurante) {
+        List<MesaModel> mesaModelList = mesaRepository.findByIdRestaurante(idRestaurante);
+
+        return mesaModelList.stream()
+                .map(this::toMesa)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Mesa findByIdMesa(UUID id) {
         MesaModel mesaModel = mesaRepository.findById(id).orElse(null);
         return mesaModel != null ? toMesa(mesaModel) : null;

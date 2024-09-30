@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("api/v1/mesa")
 public class BuscarMesaController {
@@ -26,8 +28,9 @@ public class BuscarMesaController {
 
     @GetMapping
     public ResponseEntity<Object> find(
+            @RequestParam(required = false) UUID idRestaurante,
             @RequestParam(required = false) Boolean reservada) {
-        OutputInterface outputInterface = this.getOutputInterface(reservada);
+        OutputInterface outputInterface = this.getOutputInterface(idRestaurante, reservada);
         if ( outputInterface.getOutputStatus().getCode() != HttpStatus.OK.value() ) {
             return new GenericResponse().response(outputInterface);
         }
@@ -35,8 +38,9 @@ public class BuscarMesaController {
         return new PresenterListResponse().response(presenter);
     }
 
-    private OutputInterface getOutputInterface(Boolean reservada){
+    private OutputInterface getOutputInterface(UUID idRestaurante, Boolean reservada){
         BuscarMesaInput input = BuscarMesaInput.builder()
+                .idRestaurante(idRestaurante)
                 .reservada(reservada)
                 .build();
 
