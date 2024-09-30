@@ -28,6 +28,8 @@ public class BuscarMesaUseCase extends BaseUseCase {
 
             if(input.reservada() == null){
                 data = this.repository.getMesasByIdRestaurante(input.idRestaurante());
+            }else{
+                data = this.repository.getMesasByIdRestauranteAndReservada(input.idRestaurante(), input.reservada());
             }
 
             if(!data.isEmpty()) {

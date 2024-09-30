@@ -27,9 +27,4 @@ public class BuscarMesaOutput implements OutputInterface {
         return this.mesaList;
     }
 
-    @Override
-    public OutputStatus getOutputStatus() {
-        return null;
-    }
-
 }

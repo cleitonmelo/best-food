@@ -26,12 +26,13 @@ public class BuscarMesaPresenter implements PresenterListInterface {
             mesaResult.put("codigo", mesa.codigo());
             mesaResult.put("lugares", mesa.lugares());
             mesaResult.put("reservada", mesa.reservada());
+            resultList.add(mesaResult);
         }
-        return List.of();
+        return resultList;
     }
 
     @Override
     public OutputInterface getOutput() {
-        return null;
+        return this.output;
     }
 }
