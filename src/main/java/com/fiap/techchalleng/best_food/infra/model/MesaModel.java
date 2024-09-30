@@ -27,4 +27,7 @@ public class MesaModel {
     private int lugares;
 
     private boolean reservada;
+
+    public MesaModel(UUID id, Integer codigo, Integer lugares, Boolean reservada) {
+    }
 }

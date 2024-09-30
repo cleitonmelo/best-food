@@ -19,5 +19,6 @@ abstract class BaseBdd {
 
         return URI + "/comentarios";
     }
+    public String getURIMesa(){ return URI + "/mesa"; }
 
 }

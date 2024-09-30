@@ -157,5 +157,9 @@ public class RestauranteAdapterRepository implements RestauranteInterface {
                 .reservada(mesaModel.isReservada())
                 .build();
     }
+    private void updateByIdMesa(UUID idMesa, MesaModel mesaModel){
+            mesaRepository.save(mesaModel);
+
+    }
 
 }
