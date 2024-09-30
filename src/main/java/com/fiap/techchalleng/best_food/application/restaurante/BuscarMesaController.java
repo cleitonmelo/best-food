@@ -4,8 +4,8 @@ import com.fiap.techchalleng.best_food.application.response.GenericResponse;
 import com.fiap.techchalleng.best_food.application.response.PresenterListResponse;
 import com.fiap.techchalleng.best_food.domain.generic.output.OutputInterface;
 import com.fiap.techchalleng.best_food.domain.input.restaurante.BuscarMesaInput;
-import com.fiap.techchalleng.best_food.domain.output.restaurante.BuscarRestauranteOutput;
-import com.fiap.techchalleng.best_food.domain.presenters.restaurante.find.BuscarRestaurantePresenter;
+import com.fiap.techchalleng.best_food.domain.output.restaurante.BuscarMesaOutput;
+import com.fiap.techchalleng.best_food.domain.presenters.restaurante.find.BuscarMesaPresenter;
 import com.fiap.techchalleng.best_food.domain.usecase.restaurante.BuscarMesaUseCase;
 import com.fiap.techchalleng.best_food.infra.adapter.repository.restaurante.MesaAdapterRepository;
 import com.fiap.techchalleng.best_food.infra.repository.MesaRepository;
@@ -31,7 +31,7 @@ public class BuscarMesaController {
         if ( outputInterface.getOutputStatus().getCode() != HttpStatus.OK.value() ) {
             return new GenericResponse().response(outputInterface);
         }
-        BuscarRestaurantePresenter presenter = new BuscarRestaurantePresenter((BuscarRestauranteOutput) outputInterface);
+        BuscarMesaPresenter presenter = new BuscarMesaPresenter((BuscarMesaOutput) outputInterface);
         return new PresenterListResponse().response(presenter);
     }
 
