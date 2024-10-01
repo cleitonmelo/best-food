@@ -132,6 +132,25 @@ public class DefinicaoPassos extends BaseBdd{
                 .statusCode(HttpStatus.OK.value());
     }
 
+    @Quando("buscar mesas de um restaurante")
+    public List<Mesa> buscaMesa(){
+
+        Response response = given()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .when()
+                .get(this.getURIMesa()+"/65b1bbee-c784-4457-be6d-d00b0be5c9e0");
+
+        Mesa[] mesasArray = response.then().extract().as(Mesa[].class);
+
+        return Arrays.asList(mesasArray);
+    }
+
+    @Então("deve retornar todas as mesas do restaurante")
+    public void MesaRetornadaComSucesso(){
+        response.then()
+                .statusCode(HttpStatus.OK.value());
+    }
+
     @Quando("submeter um novo comentário")
     public Comentario submeterNovoComentario() {
 

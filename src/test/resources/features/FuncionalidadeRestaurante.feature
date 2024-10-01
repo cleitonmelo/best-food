@@ -9,3 +9,8 @@ Funcionalidade: API - Restaurante
     Dado que existem restaurantes cadastrados
     Quando buscar restaurantes sem filtro
     Então deve retornar todos os restaurantes cadastrados
+
+  Cenário: Buscar mesas de um restaurante
+    Dado que existem restaurantes cadastrados
+    Quando buscar mesas de um restaurante
+    Então deve retornar todas as mesas do restaurante
