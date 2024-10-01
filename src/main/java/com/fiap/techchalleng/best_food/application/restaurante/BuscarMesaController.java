@@ -12,10 +12,7 @@ import com.fiap.techchalleng.best_food.infra.repository.MesaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -26,9 +23,9 @@ public class BuscarMesaController {
     @Autowired
     private MesaRepository mesaRepository;
 
-    @GetMapping
+    @GetMapping("/{idRestaurante}")
     public ResponseEntity<Object> find(
-            @RequestParam(required = false) UUID idRestaurante,
+            @PathVariable UUID idRestaurante,
             @RequestParam(required = false) Boolean reservada) {
         OutputInterface outputInterface = this.getOutputInterface(idRestaurante, reservada);
         if ( outputInterface.getOutputStatus().getCode() != HttpStatus.OK.value() ) {
