@@ -38,6 +38,7 @@ public class ApiPerformanceSimulation extends Simulation {
                         "}";
             }))
             .check(status().is(200))
+            .check(jsonPath("$.id").saveAs("restauranteId"))
             .check(jsonPath("$.nome").saveAs("nome"))
             .check(jsonPath("$.tipoCozinha").saveAs("tipoCozinha"))
             .check(bodyString().saveAs("responseBody"));
@@ -51,6 +52,14 @@ public class ApiPerformanceSimulation extends Simulation {
 
     ScenarioBuilder cenarioBuscarRestaurantes = scenario("buscar Restaurantes")
             .exec(buscarRestauranteRequest);
+
+    ActionBuilder buscarMesaRequest = http("buscar mesa")
+            .get("/api/v1/mesa/#{restauranteId}")
+            .check(status().is(200));
+
+    ScenarioBuilder cenarioBuscarMesa = scenario("buscar mesa")
+            .exec(criarRestauranteRequest)
+            .exec(buscarMesaRequest);
 
     ActionBuilder criarReservaRequest = http("criar reserva")
             .post("/api/v1/reservas")
@@ -153,7 +162,17 @@ public class ApiPerformanceSimulation extends Simulation {
                                 .during(Duration.ofSeconds(30)),
                         rampUsersPerSec(15)
                                 .to(1)
-                                .during(Duration.ofSeconds(5))))
+                                .during(Duration.ofSeconds(5))),
+                cenarioBuscarMesa.injectOpen(
+                        rampUsersPerSec(1)
+                                .to(15)
+                                .during(Duration.ofSeconds(5)),
+                        constantUsersPerSec(15)
+                                .during(Duration.ofSeconds(30)),
+                        rampUsersPerSec(15)
+                                .to(1)
+                                .during(Duration.ofSeconds(5)))
+        )
                 .protocols(httpProtocol)
                 .assertions(
                         global().responseTime().max().lt(200),
